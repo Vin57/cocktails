@@ -1,0 +1,19 @@
+<div *ngIf="!ingredients">
+  <span> Panier vide ! </span>
+  <span>
+    Essayez d'<a class="a" [routerLink]="['/cocktails']">
+      ajouter des ingrédients au panier
+    </a>
+  </span>
+</div>
+<div *ngIf="ingredients && ingredients.length">
+  <ul class="list-primary-cold">
+    <li
+      *ngFor="let ingredient of ingredients"
+      class="d-flex flex-row flex-justify-content-between"
+    >
+      <span class="flex-fill">{{ ingredient.name }}</span>
+      <span class="badge">{{ ingredient.quantity }}</span>
+    </li>
+  </ul>
+</div>

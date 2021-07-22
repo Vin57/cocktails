@@ -1,0 +1,24 @@
+<div class="d-flex flex-column">
+  <img class="mb-20" [src]="cocktail.img" [alt]="cocktail.name" />
+  <h3 class="mb-20">{{ cocktail.name }}</h3>
+  <div class="mb-20">
+    <ul class="list-primary-cold">
+      <li
+        *ngFor="let ingredient of cocktail.ingredients"
+        class="d-flex flex-row flex-justify-content-between"
+      >
+        <span class="flex-fill">{{ ingredient.name }}</span>
+        <span class="badge">{{ ingredient.quantity }}</span>
+      </li>
+    </ul>
+  </div>
+  <p class="mb-20">{{ cocktail.description }}</p>
+  <div>
+    <button class="btn btn-primary" (click)="editCocktail(cocktail)">
+      Editer le cocktail
+    </button>
+    <button class="btn btn-primary" (click)="addToPanier()">
+      Ajouter au panier
+    </button>
+  </div>
+</div>
