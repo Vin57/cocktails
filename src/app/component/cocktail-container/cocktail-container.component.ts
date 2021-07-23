@@ -9,22 +9,10 @@ import { CocktailService } from 'src/app/shared/cocktail.service';
   templateUrl: './cocktail-container.component.html',
   styleUrls: ['./cocktail-container.component.scss'],
 })
-export class CocktailContainerComponent implements OnInit, OnDestroy {
+export class CocktailContainerComponent implements OnInit {
   public cocktails: ICocktail[];
-
-  public subscription: Subscription = new Subscription();
 
   constructor(private cocktailService: CocktailService) {}
 
-  ngOnInit(): void {
-    this.subscription.add(
-      this.cocktailService.cocktails$.subscribe({
-        next: (coktails: ICocktail[]) => (this.cocktails = coktails),
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  ngOnInit(): void {}
 }

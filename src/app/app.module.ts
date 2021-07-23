@@ -11,7 +11,9 @@ import { CocktailContainerComponent } from './component/cocktail-container/cockt
 import { PanierDetailsComponent } from './component/panier-container/panier-details/panier-details.component';
 import { AppRouteModule } from './app-route.module';
 import { CoktailFormComponent } from './component/cocktail-container/coktail-form/coktail-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CbPipe } from './pipe/cb.pipe';
+import { FilterPipe } from './pipe/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -24,8 +26,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     PanierContainerComponent,
     PanierDetailsComponent,
     CoktailFormComponent,
+    CbPipe,
+    FilterPipe,
   ],
-  imports: [BrowserModule, AppRouteModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRouteModule, ReactiveFormsModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

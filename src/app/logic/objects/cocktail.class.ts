@@ -8,4 +8,8 @@ export class cocktail implements ICocktail {
     public ingredients: IIngredient[],
     public img?: string
   ) {}
+
+  toString(): string {
+    return this.name;
+  }
 }

@@ -1,4 +1,10 @@
 <div class="container">
-  <h3 class="mb-20">Panier</h3>
+  <h3 class="mb-20">
+    {{ "Panier du" | uppercase }} {{ 12.56 | number: "2.3":"fr-FR" }}
+  </h3>
+  <div class="mb-20">
+    Votre numéro de carte de crédit enregistrée est :
+    <span class="a">{{ "06548845154545" | cb: 5 }}</span>
+  </div>
   <app-panier-details [ingredients]="ingredients"></app-panier-details>
 </div>

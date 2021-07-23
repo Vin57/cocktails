@@ -7,6 +7,7 @@
   </span>
 </div>
 <div *ngIf="ingredients && ingredients.length">
+  total ingredients : {{ ingredients.length }}
   <ul class="list-primary-cold">
     <li
       *ngFor="let ingredient of ingredients"

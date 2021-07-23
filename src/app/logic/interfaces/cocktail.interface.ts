@@ -5,4 +5,6 @@ export interface ICocktail {
   description: string;
   ingredients: IIngredient[];
   img?: string;
+
+  toString(): string;
 }
