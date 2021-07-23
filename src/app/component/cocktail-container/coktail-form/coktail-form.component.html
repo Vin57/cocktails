@@ -1,0 +1,68 @@
+<div class="container form-control">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group d-flex flex-column mb-10">
+      <label for=""><span class="required">*</span>&nbsp;Nom</label>
+      <input formControlName="name" type="text" />
+    </div>
+    <div class="form-group d-flex flex-column mb-10">
+      <label for=""><span class="required">*</span>&nbsp;Image</label>
+      <input formControlName="img" type="text" />
+    </div>
+    <div class="form-group d-flex flex-column mb-20">
+      <label for=""><span class="required">*</span>&nbsp;Description</label>
+      <textarea formControlName="description" type="text"></textarea>
+    </div>
+    <button (click)="addIngredient()" class="btn btn-primary" type="button">
+      <span class="required">*</span>&nbsp;Ajouter un ingredient
+    </button>
+    <div class="container">
+      <ul class="list-primary-cold" formArrayName="ingredients">
+        <li
+          [formGroupName]="index"
+          *ngFor="let ingredient of ingredients.controls; let index = index"
+        >
+          <div class="form-group d-flex flex-column mb-20">
+            <label for=""><span class="required">*</span>&nbsp;Nom</label>
+            <input formControlName="name" type="text" />
+          </div>
+          <div class="form-group d-flex flex-column">
+            <label for=""><span class="required">*</span>&nbsp;Quantité</label>
+            <div
+              *ngIf="
+                findIngredientControl(index).get('quantity').touched &&
+                findIngredientControl(index).get('quantity').errors
+              "
+            >
+              <div
+                *ngIf="
+                  findIngredientControl(index).get('quantity').errors.min ||
+                  findIngredientControl(index).get('quantity').errors.required
+                "
+              >
+                <span class="error"
+                  >La quantité doit être supérieur ou égale à 1
+                </span>
+              </div>
+            </div>
+            <input formControlName="quantity" type="number" />
+          </div>
+          <div class="mb-20"></div>
+          <button
+            (click)="removeIngredient(index)"
+            class="btn btn-danger"
+            type="button"
+          >
+            &cross;
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="actions">
+      <div *ngIf="form.invalid" class="mb-10">
+        <span class="required">Des champs requis sont manquant.</span>
+      </div>
+      <button [disabled]="form.invalid" class="btn btn-primary">Valider</button>
+      <button class="btn btn-danger" routerLink="../">Annuler</button>
+    </div>
+  </form>
+</div>

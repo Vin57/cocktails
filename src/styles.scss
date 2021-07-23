@@ -110,6 +110,10 @@ body {
   margin-bottom: 20px;
 }
 
+.mb-10 {
+  margin-bottom: 10px;
+}
+
 .mr-10 {
   margin-right: 10px;
 }
@@ -127,25 +131,6 @@ body {
 }
 
 // theme
-.list-primary-cold {
-  li {
-    padding: 10px 15px;
-    border: 1px solid var(--lightgray);
-    border-top: 0;
-    &:hover {
-      inherits: unset;
-    }
-  }
-  li:first-child {
-    border-top: 1px solid var(--lightgray);
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-  }
-  li:last-child {
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-  }
-}
 
 .list-primary {
   li {
@@ -168,6 +153,29 @@ body {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
   }
+  &-cold {
+    li {
+      padding: 10px 15px;
+      border: 1px solid var(--lightgray);
+      border-top: 0;
+    }
+    li:first-child {
+      border-top: 1px solid var(--lightgray);
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+    li:last-child {
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+  }
+}
+
+.form-control {
+  display: block;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid var(--lightgray);
 }
 
 .btn {
@@ -185,10 +193,40 @@ body {
     }
     transition: background-color 0.4s;
   }
+  &-danger {
+    background-color: var(--accent);
+    color: white;
+    &:hover {
+      background-color: var(red);
+    }
+    transition: background-color 0.4s;
+  }
 }
 
 .active {
   background-color: var(--secondary);
+  color: white;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.required {
+  color: var(--accent);
+}
+
+.error {
+  color: var(--accent);
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid var(--accent);
+}
+
+input.ng-valid.ng-touched {
+  border: 1px solid lightgreen;
 }
 
 //debug

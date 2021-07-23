@@ -10,6 +10,8 @@ import { PanierContainerComponent } from './component/panier-container/panier-co
 import { CocktailContainerComponent } from './component/cocktail-container/cocktail-container.component';
 import { PanierDetailsComponent } from './component/panier-container/panier-details/panier-details.component';
 import { AppRouteModule } from './app-route.module';
+import { CoktailFormComponent } from './component/cocktail-container/coktail-form/coktail-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,8 +23,9 @@ import { AppRouteModule } from './app-route.module';
     SelectedDirective,
     PanierContainerComponent,
     PanierDetailsComponent,
+    CoktailFormComponent,
   ],
-  imports: [BrowserModule, AppRouteModule],
+  imports: [BrowserModule, AppRouteModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

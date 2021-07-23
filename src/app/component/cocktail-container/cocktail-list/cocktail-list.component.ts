@@ -10,6 +10,4 @@ export class CocktailListComponent implements OnInit {
   @Input() public cocktails: ICocktail[];
 
   ngOnInit(): void {}
-
-  emitAddCocktail(): void {}
 }

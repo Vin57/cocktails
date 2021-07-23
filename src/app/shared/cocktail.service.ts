@@ -16,4 +16,8 @@ export class CocktailService {
   getCocktail(index: number): ICocktail {
     return this.cocktails$.value[index];
   }
+
+  addCocktail(cocktail: ICocktail): void {
+    this.cocktails$.next([...this.cocktails$.value, cocktail]);
+  }
 }
