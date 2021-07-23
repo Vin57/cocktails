@@ -223,10 +223,12 @@ button:disabled {
 
 input.ng-invalid.ng-touched {
   border: 1px solid var(--accent);
+  transition: border 0.4s;
 }
 
 input.ng-valid.ng-touched {
   border: 1px solid lightgreen;
+  transition: border 0.4s;
 }
 
 //debug

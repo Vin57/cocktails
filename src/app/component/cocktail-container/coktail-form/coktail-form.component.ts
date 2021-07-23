@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ICocktail } from 'src/app/logic/interfaces/cocktail.interface';
+import { IIngredient } from 'src/app/logic/interfaces/ingredient.interface';
 import { CocktailService } from 'src/app/shared/cocktail.service';
 
 @Component({
@@ -10,6 +18,8 @@ import { CocktailService } from 'src/app/shared/cocktail.service';
 })
 export class CoktailFormComponent implements OnInit {
   public form: FormGroup;
+  public cocktail: ICocktail;
+
   constructor(
     private fb: FormBuilder,
     private cocktailService: CocktailService,
@@ -18,22 +28,14 @@ export class CoktailFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(100)]],
-      img: ['', Validators.required],
-      description: ['', Validators.required],
-      ingredients: this.fb.array(
-        [
-          this.fb.group({
-            name: ['', Validators.required],
-            quantity: [1, [Validators.required, Validators.min(1)]],
-          }),
-        ],
-        Validators.required
-      ),
-    });
-    this.form.statusChanges.subscribe((data) => {
-      console.log(data);
+    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+      const index = paramMap.get('id');
+      if (index !== null) {
+        this.cocktail = this.cocktailService.getCocktail(
+          Number.parseInt(index)
+        );
+      }
+      this.initForm(this.cocktail);
     });
   }
 
@@ -45,22 +47,57 @@ export class CoktailFormComponent implements OnInit {
     return this.ingredients.controls[index];
   }
 
-  addIngredient() {
-    this.ingredients.push(
-      this.fb.group({
-        name: ['', Validators.required],
-        quantity: [1, [Validators.required, Validators.min(1)]],
-      })
-    );
+  initForm(
+    cocktail: ICocktail = {
+      name: '',
+      img: '',
+      description: '',
+      ingredients: [{ name: '', quantity: 1 }],
+    }
+  ) {
+    this.form = this.fb.group({
+      name: [cocktail.name, [Validators.required, Validators.maxLength(100)]],
+      img: [cocktail.img, Validators.required],
+      description: [cocktail.description, Validators.required],
+      ingredients: this.fb.array(
+        cocktail.ingredients.map((ingredient) =>
+          this.initIngredientFormGroup(ingredient)
+        ),
+        Validators.required
+      ),
+    });
   }
 
-  removeIngredient(index: number) {
+  /**
+   * Add a new {@see FormGroup} for a {@see IIngredient}
+   * element.
+   * @returns FormGroup
+   */
+  initIngredientFormGroup(
+    ingredient: IIngredient = { name: '', quantity: 1 }
+  ): FormGroup {
+    return this.fb.group({
+      name: [ingredient.name, Validators.required],
+      quantity: [ingredient.quantity, [Validators.required, Validators.min(1)]],
+    });
+  }
+
+  addIngredientFormGroup(): void {
+    this.ingredients.push(this.initIngredientFormGroup());
+  }
+
+  removeIngredientFormGroup(index: number): void {
     this.ingredients.removeAt(index);
   }
 
   submit(): void {
     if (this.form.valid) {
-      this.cocktailService.addCocktail(this.form.value);
+      if (this.cocktail) {
+        this.cocktailService.editCocktail(this.cocktail.name, this.form.value);
+      } else {
+        this.cocktailService.addCocktail(this.form.value);
+      }
+
       this.router.navigate(['..'], { relativeTo: this.activatedRoute });
     }
   }

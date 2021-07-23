@@ -13,7 +13,7 @@ export const APP_ROUTES: Route[] = [
     children: [
       { path: 'new', component: CoktailFormComponent, pathMatch: 'full' },
       {
-        path: ':index/edit',
+        path: ':id/edit',
         component: CoktailFormComponent,
         pathMatch: 'full',
       },

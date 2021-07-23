@@ -12,7 +12,11 @@
       <label for=""><span class="required">*</span>&nbsp;Description</label>
       <textarea formControlName="description" type="text"></textarea>
     </div>
-    <button (click)="addIngredient()" class="btn btn-primary" type="button">
+    <button
+      (click)="addIngredientFormGroup()"
+      class="btn btn-primary"
+      type="button"
+    >
       <span class="required">*</span>&nbsp;Ajouter un ingredient
     </button>
     <div class="container">
@@ -48,7 +52,7 @@
           </div>
           <div class="mb-20"></div>
           <button
-            (click)="removeIngredient(index)"
+            (click)="removeIngredientFormGroup(index)"
             class="btn btn-danger"
             type="button"
           >
