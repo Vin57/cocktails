@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ICocktail } from 'src/app/logic/interfaces/cocktail.interface';
-import { UserService } from 'src/app/shared/user.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-cocktail-list',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { IIngredient } from '../logic/interfaces/ingredient.interface';
-import { cocktail } from '../logic/objects/cocktail.class';
+import { IIngredient } from 'src/app/logic/interfaces/ingredient.interface';
+import { cocktail } from 'src/app/logic/objects/cocktail.class';
 
 @Injectable({
   providedIn: 'root',

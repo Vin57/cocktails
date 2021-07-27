@@ -1,9 +1,9 @@
 import { Component, LOCALE_ID, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Ingredient } from 'src/app/logic/objects/ingredient.class';
-import { PanierService } from 'src/app/shared/panier.service';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
+import { PanierService } from 'src/app/shared/services/panier.service';
 registerLocaleData(localeFr);
 
 @Component({

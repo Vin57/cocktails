@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { PanierContainerComponent } from './panier-container/panier-container.component';
 import { PanierDetailsComponent } from './panier-container/panier-details/panier-details.component';
 import { CbPipe } from 'src/app/pipe/cb.pipe';
-import { AppRouteModule } from 'src/app/app-route.module';
-
+import { RouterModule } from '@angular/router';
+import { APP_PANIER_ROUTES } from './panier.routes';
+import { SharedModule } from 'src/app/shared/modules/shared.module';
 
 
 @NgModule({
@@ -14,8 +14,8 @@ import { AppRouteModule } from 'src/app/app-route.module';
     CbPipe
   ],
   imports: [
-    CommonModule,
-    AppRouteModule
+    SharedModule,
+    RouterModule.forChild(APP_PANIER_ROUTES)
   ]
 })
 export class PanierModule { }

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { CocktailFixtures } from '../logic/fixtures/cocktails.fixtures';
-import { ICocktail } from '../logic/interfaces/cocktail.interface';
-import { tap, filter, map, first } from 'rxjs/operators';
+import { CocktailFixtures } from '../../logic/fixtures/cocktails.fixtures';
+import { ICocktail } from '../../logic/interfaces/cocktail.interface';
+import { tap, filter, map } from 'rxjs/operators';
 const HTTP_API = 'cocktails';
 
 @Injectable({

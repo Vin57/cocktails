@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ICocktail } from 'src/app/logic/interfaces/cocktail.interface';
-import { CocktailService } from 'src/app/shared/cocktail.service';
-import { PanierService } from 'src/app/shared/panier.service';
+import { CocktailService } from 'src/app/shared/services/cocktail.service';
+import { PanierService } from 'src/app/shared/services/panier.service';
 
 @Component({
   selector: 'app-cocktail-details',

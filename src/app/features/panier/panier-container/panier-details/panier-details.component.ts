@@ -8,6 +8,7 @@ import { IIngredient } from 'src/app/logic/interfaces/ingredient.interface';
 })
 export class PanierDetailsComponent implements OnInit {
   @Input() public ingredients: IIngredient[];
+  public search: string = "";
   constructor() {}
 
   ngOnInit(): void {}

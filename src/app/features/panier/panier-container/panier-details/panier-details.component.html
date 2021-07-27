@@ -8,9 +8,12 @@
 </div>
 <div *ngIf="ingredients && ingredients.length">
   total ingredients : {{ ingredients.length }}
+  <div class="form-control">
+    <input type="text" [(ngModel)]="search" placeholder="Recherche un cocktail" />
+  </div>
   <ul class="list-primary-cold">
     <li
-      *ngFor="let ingredient of ingredients"
+      *ngFor="let ingredient of ingredients | filter: search"
       class="d-flex flex-row flex-justify-content-between"
     >
       <span class="flex-fill">{{ ingredient.name }}</span>

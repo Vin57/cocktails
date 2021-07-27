@@ -10,7 +10,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { ICocktail } from 'src/app/logic/interfaces/cocktail.interface';
 import { IIngredient } from 'src/app/logic/interfaces/ingredient.interface';
-import { CocktailService } from 'src/app/shared/cocktail.service';
+import { CocktailService } from 'src/app/shared/services/cocktail.service';
 
 @Component({
   selector: 'app-coktail-form',
