@@ -1,8 +1,7 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLinkActive } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ICocktail } from 'src/app/logic/interfaces/cocktail.interface';
-import { cocktail } from 'src/app/logic/objects/cocktail.class';
 import { CocktailService } from 'src/app/shared/cocktail.service';
 import { PanierService } from 'src/app/shared/panier.service';
 
@@ -21,20 +20,22 @@ export class CocktailDetailsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscription.add(
-      this.route.paramMap.subscribe((data) => {
-        let cocktail_id: number = Number.parseInt(data.get('id'));
-        this.cocktail = this.cocktailService.getCocktail(cocktail_id);
-      })
-    );
+    this.route.paramMap.subscribe((data) => {
+      if (this.subscription) {
+        // On ne souscrit le flux qu'une fois
+        // Cela évite les perte de mémoires
+        this.subscription.unsubscribe();
+      }
+      let cocktail_id: string = data.get('id');
+      // On souscrit le flux
+      this.subscription = this.cocktailService
+        .getCocktail(cocktail_id)
+        .subscribe((cocktail) => (this.cocktail = cocktail));
+    });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }
-
-  editCocktail(cocktail: ICocktail): void {
-    this.cocktail.name += '1';
   }
 
   addToPanier(): void {

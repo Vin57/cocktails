@@ -1,6 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ICocktail } from 'src/app/logic/interfaces/cocktail.interface';
 import { CocktailService } from 'src/app/shared/cocktail.service';
 
@@ -10,8 +9,7 @@ import { CocktailService } from 'src/app/shared/cocktail.service';
   styleUrls: ['./cocktail-container.component.scss'],
 })
 export class CocktailContainerComponent implements OnInit {
-  public cocktails: ICocktail[];
-
+  public cocktails$: Observable<ICocktail[]> = this.cocktailService.cocktails$;
   constructor(private cocktailService: CocktailService) {}
 
   ngOnInit(): void {}

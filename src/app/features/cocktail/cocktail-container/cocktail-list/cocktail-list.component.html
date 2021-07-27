@@ -1,13 +1,14 @@
 <h3 class="mb-20">Liste des cocktails</h3>
-<input class="form-control" type="text" [(ngModel)]="search" />
-<ul *ngIf="cocktails.length" class="mb-20 list-primary">
+<div class="form-control">
+  <input type="text" [(ngModel)]="search" placeholder="Recherche un cocktail" />
+</div>
+<ul *ngIf="cocktails" class="mb-20 list-primary">
   <li
     routerLinkActive="active"
     *ngFor="let cocktail of cocktails | filter: search; let i = index"
-    [routerLink]="[i]"
+    [routerLink]="[cocktail._id]"
   >
     {{ cocktail.name }}
   </li>
 </ul>
-
 <button routerLink="new" class="btn btn-primary">Ajouter un cocktail</button>

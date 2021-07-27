@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { CocktailContainerComponent } from './component/cocktail-container/cocktail-container.component';
-import { CocktailDetailsComponent } from './component/cocktail-container/cocktail-details/cocktail-details.component';
-import { CoktailFormComponent } from './component/cocktail-container/coktail-form/coktail-form.component';
-import { PanierContainerComponent } from './component/panier-container/panier-container.component';
+import { CocktailContainerComponent } from './features/cocktail/cocktail-container/cocktail-container.component';
+import { CocktailDetailsComponent } from './features/cocktail/cocktail-container/cocktail-details/cocktail-details.component';
+import { CoktailFormComponent } from './features/cocktail/cocktail-container/coktail-form/coktail-form.component';
+import { PanierContainerComponent } from './features/panier/panier-container/panier-container.component';
 
 export const APP_ROUTES: Route[] = [
   { path: '', redirectTo: 'cocktails', pathMatch: 'full' },

@@ -6,7 +6,8 @@ export class cocktail implements ICocktail {
     public name: string,
     public description: string,
     public ingredients: IIngredient[],
-    public img?: string
+    public img?: string,
+    public _id?: string
   ) {}
 
   toString(): string {

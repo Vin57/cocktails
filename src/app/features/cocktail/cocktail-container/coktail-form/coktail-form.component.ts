@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
-  FormGroupDirective,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 import { ICocktail } from 'src/app/logic/interfaces/cocktail.interface';
 import { IIngredient } from 'src/app/logic/interfaces/ingredient.interface';
 import { CocktailService } from 'src/app/shared/cocktail.service';
@@ -27,15 +28,27 @@ export class CoktailFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
+  matchId(control: FormControl): { [matchId: string]: boolean } | null {
+    if (!this.cocktail) {
+      return null; // Pas de contrôle si cocktail vide
+    }
+    return this.cocktail._id === control.value ? null : { matchId: false };
+  }
+
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-      const index = paramMap.get('id');
-      if (index !== null) {
-        this.cocktail = this.cocktailService.getCocktail(
-          Number.parseInt(index)
-        );
+      const cocktail_id = paramMap.get('id');
+      if (cocktail_id !== null) {
+        this.cocktailService
+          .getCocktail(cocktail_id)
+          .pipe(first())
+          .subscribe((cocktail) => {
+            this.cocktail = cocktail;
+            this.initForm(this.cocktail);
+          });
+      } else {
+        this.initForm(this.cocktail);
       }
-      this.initForm(this.cocktail);
     });
   }
 
@@ -49,6 +62,7 @@ export class CoktailFormComponent implements OnInit {
 
   initForm(
     cocktail: ICocktail = {
+      _id: null,
       name: '',
       img: '',
       description: '',
@@ -56,6 +70,7 @@ export class CoktailFormComponent implements OnInit {
     }
   ) {
     this.form = this.fb.group({
+      _id: [cocktail._id, this.matchId.bind(this)],
       name: [cocktail.name, [Validators.required, Validators.maxLength(100)]],
       img: [cocktail.img, Validators.required],
       description: [cocktail.description, Validators.required],
@@ -93,11 +108,10 @@ export class CoktailFormComponent implements OnInit {
   submit(): void {
     if (this.form.valid) {
       if (this.cocktail) {
-        this.cocktailService.editCocktail(this.cocktail.name, this.form.value);
+        this.cocktailService.editCocktail(this.form.value).subscribe(() => {});
       } else {
-        this.cocktailService.addCocktail(this.form.value);
+        this.cocktailService.addCocktail(this.form.value).subscribe(() => {});
       }
-
       this.router.navigate(['..'], { relativeTo: this.activatedRoute });
     }
   }
